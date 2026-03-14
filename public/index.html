@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EasyHealth | Dashboard</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css"
+    />
+    <style>
+      .hero-section {
+        background: linear-gradient(135deg, #0d6efd 0%, #0046af 100%);
+        color: white;
+        padding: 60px 0;
+        margin-bottom: 40px;
+      }
+      .feature-card {
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        cursor: pointer;
+        border: none;
+      }
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+      }
+      .icon-box {
+        font-size: 3rem;
+        color: #0d6efd;
+        margin-bottom: 15px;
+      }
+    </style>
+  </head>
+  <body class="bg-light">
+    <header class="hero-section shadow">
+      <div class="container text-center">
+        <h1 class="display-4 fw-bold">🏥 EasyHealth</h1>
+        <p class="lead">Sistema Inteligente de Gestão Clínica</p>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="row g-4 justify-content-center">
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm feature-card">
+            <div class="card-body text-center p-4">
+              <div class="icon-box">
+                <i class="bi bi-person-plus-fill"></i>
+              </div>
+              <h4 class="card-title">Pacientes</h4>
+              <p class="card-text text-muted">
+                Cadastre novos pacientes e organize o histórico clínico.
+              </p>
+              <a href="cadastrar.html" class="btn btn-primary w-100 mt-3"
+                >Novo Cadastro</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm feature-card">
+            <div class="card-body text-center p-4">
+              <div class="icon-box text-info">
+                <i class="bi bi-card-checklist"></i>
+              </div>
+              <h4 class="card-title">Consultas</h4>
+              <p class="card-text text-muted">
+                Visualize e gerencie a lista de pacientes ativos no sistema.
+              </p>
+              <a href="listagem.html" class="btn btn-outline-primary w-100 mt-3"
+                >Ver Listagem</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="text-center mt-5 py-4 text-muted">
+      <small>2026 EasyHealth - Projeto de Software AC1</small>
+    </footer>
+  </body>
+</html>

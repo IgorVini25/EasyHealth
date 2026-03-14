@@ -1,0 +1,25 @@
+{
+  "name": "easyhealth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IgorVini25/EasyHealth.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IgorVini25/EasyHealth/issues"
+  },
+  "homepage": "https://github.com/IgorVini25/EasyHealth#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "mongoose": "^9.3.0"
+  }
+}
