@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <title>EasyHealth | Novo Médico</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="./js/script.js" defer></script>
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">🏥 EasyHealth</a>
+        <div class="navbar-nav">
+          <a class="nav-link" href="listagem-medicos.html">Lista de Médicos</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card shadow">
+            <div class="card-header bg-white">
+              <h4 class="mb-0">Cadastro de Médico</h4>
+            </div>
+            <div class="card-body">
+              <form id="formMedico" autocomplete="off">
+                <div class="mb-3">
+                  <label class="form-label">Nome Completo</label>
+                  <input
+                    type="text"
+                    id="nomeMedico"
+                    class="form-control"
+                    placeholder="Nome do médico"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">CRM</label>
+                  <input
+                    type="text"
+                    id="crm"
+                    class="form-control"
+                    placeholder="Ex: 123456"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Especialidade</label>
+                  <select id="especialidade" class="form-select" required>
+                    <option value="">Selecione uma especialidade...</option>
+                    <option value="Cardiologia">Cardiologia</option>
+                    <option value="Dermatologia">Dermatologia</option>
+                    <option value="Ginecologia">Ginecologia</option>
+                    <option value="Neurologia">Neurologia</option>
+                    <option value="Ortopedia">Ortopedia</option>
+                    <option value="Pediatria">Pediatria</option>
+                    <option value="Psiquiatria">Psiquiatria</option>
+                    <option value="Urologia">Urologia</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Telefone</label>
+                  <input
+                    type="text"
+                    id="telefoneMedico"
+                    class="form-control"
+                    maxlength="15"
+                    placeholder="(00) 00000-0000"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary w-100">
+                  Cadastrar Médico
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

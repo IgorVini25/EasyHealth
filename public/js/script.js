@@ -1,6 +1,7 @@
-const API_URL = 'http://localhost:3000/pacientes'
+const API_PACIENTES = 'http://localhost:3000/pacientes'
+const API_MEDICOS = 'http://localhost:3000/medicos'
 
-// Lógica dos pontos e traços no CPF e telefone
+// Mascaras
 const mascaraCPF = valor => {
   return valor
     .replace(/\D/g, '')
@@ -18,16 +19,28 @@ const mascaraTelefone = valor => {
     .replace(/(-\d{4})\d+?$/, '$1')
 }
 
-document.getElementById('cpf')?.addEventListener('input', e => {
-  e.target.value = mascaraCPF(e.target.value)
-})
+document
+  .getElementById('cpf')
+  ?.addEventListener(
+    'input',
+    e => (e.target.value = mascaraCPF(e.target.value))
+  )
+document
+  .getElementById('telefone')
+  ?.addEventListener(
+    'input',
+    e => (e.target.value = mascaraTelefone(e.target.value))
+  )
+document
+  .getElementById('telefoneMedico')
+  ?.addEventListener(
+    'input',
+    e => (e.target.value = mascaraTelefone(e.target.value))
+  )
 
-document.getElementById('telefone')?.addEventListener('input', e => {
-  e.target.value = mascaraTelefone(e.target.value)
-})
-
+// Pacientes
 async function carregarPacientes() {
-  const resposta = await fetch(API_URL)
+  const resposta = await fetch(API_PACIENTES)
   const pacientes = await resposta.json()
   const tbody = document.querySelector('#tabelaPacientes tbody')
 
@@ -46,45 +59,80 @@ async function carregarPacientes() {
 document.getElementById('formPaciente')?.addEventListener('submit', async e => {
   e.preventDefault()
 
-  // Envia apenas números para o banco
   const cpfLimpo = document.getElementById('cpf').value.replace(/\D/g, '')
-  const telefoneLimpo = document
-    .getElementById('telefone')
-    .value.replace(/\D/g, '')
-
-  if (cpfLimpo.length !== 11 || telefoneLimpo.length < 10) {
-    alert('Verifique os dados digitados.')
-    return
-  }
+  const telLimpo = document.getElementById('telefone').value.replace(/\D/g, '')
 
   const dados = {
     nome: document.getElementById('nome').value,
     cpf: cpfLimpo,
-    telefone: telefoneLimpo
+    telefone: telLimpo
   }
 
-  try {
-    const resposta = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(dados)
-    })
+  const res = await fetch(API_PACIENTES, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados)
+  })
 
-    if (resposta.ok) {
-      alert('Cadastrado com sucesso!')
-      if (document.querySelector('#tabelaPacientes')) {
-        document.getElementById('formPaciente').reset()
-        carregarPacientes()
-      } else {
-        window.location.href = 'listagem.html'
-      }
-    } else {
-      const erro = await resposta.json()
-      alert('Erro: ' + (erro.detalhe || 'Falha no cadastro'))
-    }
-  } catch (error) {
-    alert('Erro de conexão.')
+  if (res.ok) {
+    alert('Cadastrado com sucesso!')
+    window.location.href = 'listagem.html'
   }
 })
 
+// Medicos
+async function carregarMedicos() {
+  const tbody = document.querySelector('#tabelaMedicos tbody')
+  if (!tbody) return
+
+  const filtro =
+    document.getElementById('filtroEspecialidade')?.value || 'Todos'
+  const resposta = await fetch(API_MEDICOS)
+  const medicos = await resposta.json()
+
+  tbody.innerHTML = ''
+
+  const lista =
+    filtro === 'Todos'
+      ? medicos
+      : medicos.filter(m => m.especialidade === filtro)
+
+  lista.forEach(m => {
+    tbody.innerHTML += `<tr>
+            <td>${m.nome}</td>
+            <td>${m.crm}</td>
+            <td><span class="badge bg-info text-dark">${m.especialidade}</span></td>
+            <td>${mascaraTelefone(m.telefone)}</td>
+        </tr>`
+  })
+}
+
+document.getElementById('formMedico')?.addEventListener('submit', async e => {
+  e.preventDefault()
+
+  const dados = {
+    nome: document.getElementById('nomeMedico').value,
+    crm: document.getElementById('crm').value,
+    especialidade: document.getElementById('especialidade').value,
+    telefone: document.getElementById('telefoneMedico').value.replace(/\D/g, '')
+  }
+
+  const res = await fetch(API_MEDICOS, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dados)
+  })
+
+  if (res.ok) {
+    alert('Médico cadastrado!')
+    window.location.href = 'listagem-medicos.html'
+  }
+})
+
+document
+  .getElementById('filtroEspecialidade')
+  ?.addEventListener('change', carregarMedicos)
+
+// Inicialização
 carregarPacientes()
+carregarMedicos()

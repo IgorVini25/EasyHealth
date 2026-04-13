@@ -16,66 +16,92 @@
       .hero-section {
         background: linear-gradient(135deg, #0d6efd 0%, #0046af 100%);
         color: white;
-        padding: 60px 0;
+        padding: 50px 0;
         margin-bottom: 40px;
       }
       .feature-card {
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-        cursor: pointer;
-        border: none;
+        transition: transform 0.2s ease;
+        border: 1px solid #dee2e6;
+        border-radius: 0; /* Removendo arredondamento */
       }
       .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       }
-      .icon-box {
-        font-size: 3rem;
-        color: #0d6efd;
-        margin-bottom: 15px;
-      }
+      .btn {
+        border-radius: 0;
+      } /* Botões quadrados para combinar */
     </style>
   </head>
   <body class="bg-light">
-    <header class="hero-section shadow">
-      <div class="container text-center">
-        <h1 class="display-4 fw-bold">🏥 EasyHealth</h1>
-        <p class="lead">Sistema de Gestão Clínica</p>
+    <header class="hero-section shadow-sm text-center">
+      <div class="container">
+        <h1 class="fw-bold">🏥 EasyHealth</h1>
+        <p class="lead">Painel de Controle Clínico</p>
       </div>
     </header>
 
     <main class="container">
-      <div class="row g-4 justify-content-center">
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm feature-card">
-            <div class="card-body text-center p-4">
-              <div class="icon-box">
-                <i class="bi bi-person-plus-fill"></i>
-              </div>
-              <h4 class="card-title">Pacientes</h4>
-              <p class="card-text text-muted">
-                Cadastre novos pacientes e organize o histórico clínico.
-              </p>
-              <a href="cadastrar.html" class="btn btn-primary w-100 mt-3"
-                >Novo Cadastro</a
+      <div class="row g-4">
+        <div class="col-md-3">
+          <div class="card h-100 feature-card">
+            <div class="card-body text-center">
+              <i class="bi bi-person-plus fs-1 text-primary"></i>
+              <h5 class="card-title mt-3">Novo Paciente</h5>
+              <p class="card-text small text-muted">Cadastrar novo registro.</p>
+              <a href="cadastrar.html" class="btn btn-primary btn-sm w-100"
+                >Acessar</a
               >
             </div>
           </div>
         </div>
 
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm feature-card">
-            <div class="card-body text-center p-4">
-              <div class="icon-box text-info">
-                <i class="bi bi-card-checklist"></i>
-              </div>
-              <h4 class="card-title">Consultas</h4>
-              <p class="card-text text-muted">
-                Visualize e gerencie a lista de pacientes ativos no sistema.
+        <div class="col-md-3">
+          <div class="card h-100 feature-card">
+            <div class="card-body text-center">
+              <i class="bi bi-people fs-1 text-primary"></i>
+              <h5 class="card-title mt-3">Lista de Pacientes</h5>
+              <p class="card-text small text-muted">Consultar base completa.</p>
+              <a
+                href="listagem.html"
+                class="btn btn-outline-primary btn-sm w-100"
+                >Visualizar</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card h-100 feature-card">
+            <div
+              class="card-body text-center border-start border-primary border-4"
+            >
+              <i class="bi bi-person-vcard fs-1 text-success"></i>
+              <h5 class="card-title mt-3">Novo Médico</h5>
+              <p class="card-text small text-muted">
+                Registro de profissionais.
               </p>
-              <a href="listagem.html" class="btn btn-outline-primary w-100 mt-3"
-                >Ver Listagem</a
+              <a
+                href="cadastrar-medico.html"
+                class="btn btn-success btn-sm w-100"
+                >Acessar</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3">
+          <div class="card h-100 feature-card">
+            <div class="card-body text-center">
+              <i class="bi bi-person-lines-fill fs-1 text-success"></i>
+              <h5 class="card-title mt-3">Lista de Médicos</h5>
+              <p class="card-text small text-muted">
+                Gestão por especialidade.
+              </p>
+              <a
+                href="listagem-medicos.html"
+                class="btn btn-outline-success btn-sm w-100"
+                >Visualizar</a
               >
             </div>
           </div>
@@ -84,7 +110,8 @@
     </main>
 
     <footer class="text-center mt-5 py-4 text-muted">
-      <small>2026 EasyHealth - Projeto de Software AC1</small>
+      <hr />
+      <small>EasyHealth &copy; 2026 | AC2 - Gestão de Profissionais</small>
     </footer>
   </body>
 </html>

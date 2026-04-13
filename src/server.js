@@ -24,6 +24,16 @@ const PacienteSchema = new mongoose.Schema({
 
 const Paciente = mongoose.model('Paciente', PacienteSchema)
 
+// Schema da tabela Medico
+const MedicoSchema = new mongoose.Schema({
+  nome: { type: String, required: true },
+  crm: { type: String, required: true, unique: true },
+  especialidade: { type: String, required: true },
+  telefone: { type: String, required: true }
+})
+
+const Medico = mongoose.model('Medico', MedicoSchema)
+
 // Rotas
 app.post('/pacientes', async (req, res) => {
   try {
@@ -45,6 +55,27 @@ app.get('/pacientes', async (req, res) => {
     res.status(200).json(lista)
   } catch (error) {
     res.status(500).json({ mensagem: 'Erro ao buscar pacientes' })
+  }
+})
+
+app.post('/medicos', async (req, res) => {
+  try {
+    const novoMedico = new Medico(req.body)
+    await novoMedico.save()
+    res.status(201).json({ mensagem: 'Médico cadastrado!' })
+  } catch (error) {
+    res
+      .status(400)
+      .json({ mensagem: 'Erro ao cadastrar', detalhe: error.message })
+  }
+})
+
+app.get('/medicos', async (req, res) => {
+  try {
+    const lista = await Medico.find()
+    res.status(200).json(lista)
+  } catch (error) {
+    res.status(500).json({ mensagem: 'Erro ao buscar médicos' })
   }
 })
 
