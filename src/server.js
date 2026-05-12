@@ -32,6 +32,23 @@ const MedicoSchema = new mongoose.Schema({
   telefone: { type: String, required: true }
 })
 
+// Modelo de Agendamento
+const AgendamentoSchema = new mongoose.Schema({
+  paciente: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Paciente',
+    required: true
+  },
+  medico: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Medico',
+    required: true
+  },
+  data: { type: String, required: true },
+  horario: { type: String, required: true },
+  status: { type: String, default: 'Agendado' }
+})
+
 const Medico = mongoose.model('Medico', MedicoSchema)
 
 // Rotas
@@ -76,6 +93,33 @@ app.get('/medicos', async (req, res) => {
     res.status(200).json(lista)
   } catch (error) {
     res.status(500).json({ mensagem: 'Erro ao buscar médicos' })
+  }
+})
+
+const Agendamento = mongoose.model('Agendamento', AgendamentoSchema)
+
+// Rota para criar agendamento
+app.post('/agendamentos', async (req, res) => {
+  try {
+    const novo = new Agendamento(req.body)
+    await novo.save()
+    res.status(201).json({ mensagem: 'Consulta agendada!' })
+  } catch (error) {
+    res
+      .status(400)
+      .json({ mensagem: 'Erro ao agendar', detalhe: error.message })
+  }
+})
+
+// Rota para listar (usando populate para trazer os nomes em vez de só IDs)
+app.get('/agendamentos', async (req, res) => {
+  try {
+    const lista = await Agendamento.find()
+      .populate('paciente', 'nome')
+      .populate('medico', 'nome especialidade')
+    res.status(200).json(lista)
+  } catch (error) {
+    res.status(500).json({ mensagem: 'Erro ao buscar agendamentos' })
   }
 })
 
