@@ -123,6 +123,39 @@ app.get('/agendamentos', async (req, res) => {
   }
 })
 
+// Rota para atualizar paciente
+app.put('/pacientes/:id', async (req, res) => {
+  try {
+    const paciente = await Paciente.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+    if (!paciente) return res.status(404).json({ mensagem: 'Paciente não encontrado' })
+    res.status(200).json({ mensagem: 'Paciente atualizado!', paciente })
+  } catch (error) {
+    res.status(400).json({ mensagem: 'Erro ao atualizar paciente.', detalhe: error.message })
+  }
+})
+
+// Rota para atualizar médico
+app.put('/medicos/:id', async (req, res) => {
+  try {
+    const medico = await Medico.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+    if (!medico) return res.status(404).json({ mensagem: 'Médico não encontrado' })
+    res.status(200).json({ mensagem: 'Médico atualizado!', medico })
+  } catch (error) {
+    res.status(400).json({ mensagem: 'Erro ao atualizar médico.', detalhe: error.message })
+  }
+})
+
+// Rota para atualizar agendamento
+app.put('/agendamentos/:id', async (req, res) => {
+  try {
+    const agendamento = await Agendamento.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
+    if (!agendamento) return res.status(404).json({ mensagem: 'Agendamento não encontrado' })
+    res.status(200).json({ mensagem: 'Agendamento atualizado!', agendamento })
+  } catch (error) {
+    res.status(400).json({ mensagem: 'Erro ao atualizar agendamento.', detalhe: error.message })
+  }
+})
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
 })
